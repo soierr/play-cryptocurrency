@@ -13,7 +13,7 @@ spring:
 
 springdoc:
   swagger-ui:
-    enabled: true
+    enabled: false
 xm:
   file-loader:
     price-folder-path: ${PRICE_FOLDER_PATH}

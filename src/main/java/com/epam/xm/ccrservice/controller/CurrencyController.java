@@ -18,6 +18,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/currency")
 @RequiredArgsConstructor
+/* todo
+    - validation
+    - exception handling
+    - logging
+    - Instant to ZonedDatTime
+ */
 public class CurrencyController {
 
     private final CurrencyService currencyService;

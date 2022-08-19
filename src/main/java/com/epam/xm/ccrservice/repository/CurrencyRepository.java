@@ -18,8 +18,7 @@ public interface CurrencyRepository extends JpaRepository<Currency, Long> {
             "order by normalizedRange desc") //no underscore in alias, otherwise null fields returned
     List<CurrencyRange> getCurrencyRanges();
 
-
-    List<Currency> getAllByCurrencyCodeOrderByCurrencyDateDesc(String code);
+    List<Currency> getAllByCurrencyCode(String code);
 
     @Query(nativeQuery = true, value = "select currency_code as currencyCode, ((max(price) - min(price))/min(price)) as normalizedRange\n" +
             "from currency\n" +

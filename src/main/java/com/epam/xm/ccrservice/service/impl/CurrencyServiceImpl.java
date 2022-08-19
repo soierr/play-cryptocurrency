@@ -30,25 +30,28 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Cacheable(value = "currency-filtered", key="#currencyCode")
     public List<CurrencyFiltered> getCurrencyFiltered(String currencyCode) {
 
-        List<Currency> currencies = currencyRepository.getAllByCurrencyCodeOrderByCurrencyDateDesc(currencyCode);
+        List<Currency> currencies = currencyRepository.getAllByCurrencyCode(currencyCode);
 
         if (!currencies.isEmpty()) {
 
             List<CurrencyFiltered> currenciesFiltered = new ArrayList<>();
 
-            CurrencyFiltered currencyFiltered = new CurrencyFiltered(currencyCode,
-                    currencies.get(0).getCurrencyDate(),
-                    CurrencyFilteredType.NEWEST,
-                    currencies.get(0).getPrice());
+            //can be generalized
+            currenciesFiltered.add(currencies.stream()
+                    .max(Comparator.comparing(Currency::getCurrencyDate))
+                    .map(c -> new CurrencyFiltered(currencyCode,
+                            c.getCurrencyDate(),
+                            CurrencyFilteredType.NEWEST,
+                            c.getPrice()))
+                    .orElse(null));
 
-            currenciesFiltered.add(currencyFiltered);
-
-            currencyFiltered = new CurrencyFiltered(currencyCode,
-                    currencies.get(currencies.size() - 1).getCurrencyDate(),
-                    CurrencyFilteredType.OLDEST,
-                    currencies.get(currencies.size() - 1).getPrice());
-
-            currenciesFiltered.add(currencyFiltered);
+            currenciesFiltered.add(currencies.stream()
+                    .min(Comparator.comparing(Currency::getCurrencyDate))
+                    .map(c -> new CurrencyFiltered(currencyCode,
+                            c.getCurrencyDate(),
+                            CurrencyFilteredType.OLDEST,
+                            c.getPrice()))
+                    .orElse(null));
 
             currenciesFiltered.add(currencies.stream()
                     .max(Comparator.comparing(Currency::getPrice))
@@ -78,4 +81,5 @@ public class CurrencyServiceImpl implements CurrencyService {
     public CurrencyRange getHighestRange(String date) {
         return currencyRepository.getCurrencyHighestRange(date);
     }
+
 }

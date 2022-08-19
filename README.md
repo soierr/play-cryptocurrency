@@ -11,7 +11,7 @@ Java 11 used
 
 Project name: `play-cryptocurrency`
 
-### API Documentaion
+### API Documentation
 
 Provided as local `swagger-ui.html`
 

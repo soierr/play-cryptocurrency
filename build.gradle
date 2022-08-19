@@ -1,7 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.7.2'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-
     id 'java'
 }
 
@@ -24,6 +23,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
     implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.1.7'
