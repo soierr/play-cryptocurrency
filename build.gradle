@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+
+    id 'java'
+}
+
+group 'com.epam.xm'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    setProperty('mainClass', 'com.epam.xm.ccrservice.RecommendationService')
+}
+
+jar {
+    enabled false
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
+    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.1.7'
+
+    implementation 'mysql:mysql-connector-java:8.0.30'
+
+    implementation 'org.flywaydb:flyway-core:6.5.7'
+
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}

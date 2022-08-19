@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${DB_JDBC_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+xm:
+  file-loader:
+    price-folder-path: ${PRICE_FOLDER_PATH}
