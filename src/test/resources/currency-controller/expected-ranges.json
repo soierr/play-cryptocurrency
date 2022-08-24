@@ -1,0 +1,22 @@
+[
+  {
+    "currencyCode": "ETH",
+    "normalizedRange": 0.638381
+  },
+  {
+    "currencyCode": "XRP",
+    "normalizedRange": 0.517857
+  },
+  {
+    "currencyCode": "LTC",
+    "normalizedRange": 0.465184
+  },
+  {
+    "currencyCode": "DOGE",
+    "normalizedRange": 0.461538
+  },
+  {
+    "currencyCode": "BTC",
+    "normalizedRange": 0.434121
+  }
+]

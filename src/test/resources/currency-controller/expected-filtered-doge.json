@@ -1,0 +1,26 @@
+[
+  {
+    "currencyCode": "DOGE",
+    "currencyDate": "2022-01-31T21:00:00+02:00",
+    "price": 0.14,
+    "filterType": "NEWEST"
+  },
+  {
+    "currencyCode": "DOGE",
+    "currencyDate": "2022-01-01T07:00:00+02:00",
+    "price": 0.17,
+    "filterType": "OLDEST"
+  },
+  {
+    "currencyCode": "DOGE",
+    "currencyDate": "2022-01-14T18:00:00+02:00",
+    "price": 0.19,
+    "filterType": "MAX"
+  },
+  {
+    "currencyCode": "DOGE",
+    "currencyDate": "2022-01-22T13:00:00+02:00",
+    "price": 0.13,
+    "filterType": "MIN"
+  }
+]

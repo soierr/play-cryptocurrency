@@ -1,9 +1,10 @@
 package com.epam.xm.ccrservice.service;
 
-import com.epam.xm.ccrservice.model.CurrencyFiltered;
+import com.epam.xm.ccrservice.model.projection.CurrencyFiltered;
 import com.epam.xm.ccrservice.model.projection.CurrencyRange;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CurrencyService {
 
@@ -14,6 +15,6 @@ public interface CurrencyService {
     List<CurrencyFiltered> getCurrencyFiltered(String currencyCode);
 
     /* return the crypto with the highest normalized range for a specific day */
-    CurrencyRange getHighestRange(String date);
+    Optional<CurrencyRange> getHighestRange(String date);
 
 }

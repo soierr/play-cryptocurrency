@@ -13,10 +13,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
 /*
  * Can be implemented further with parallel processing for price files
  * */
+@Service
 public class FileLoaderService {
 
     private final FileInfoRepository fileInfoRepository;
@@ -36,7 +36,7 @@ public class FileLoaderService {
         this.currencyRepository = currencyRepository;
         this.parsingService = parsingService;
 
-        load(); //may be "try/catch"
+        load(); //app start fails in case of any exception
     }
 
     private void load() {
@@ -45,6 +45,7 @@ public class FileLoaderService {
 
         targetFiles = new HashSet<>(targetFiles);
 
+        /* let's see what files we already have processed and loaded in db */
         Set<PriceFile> processed = fileInfoRepository.findAll().stream()
                 .map(fi -> PriceFile.builder()
                         .filename(fi.getFilename())

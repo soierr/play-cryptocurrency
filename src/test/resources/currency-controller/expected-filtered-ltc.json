@@ -1,0 +1,26 @@
+[
+  {
+    "currencyCode": "LTC",
+    "currencyDate": "2022-01-31T19:00:00+02:00",
+    "price": 109.60,
+    "filterType": "NEWEST"
+  },
+  {
+    "currencyCode": "LTC",
+    "currencyDate": "2022-01-01T08:00:00+02:00",
+    "price": 148.10,
+    "filterType": "OLDEST"
+  },
+  {
+    "currencyCode": "LTC",
+    "currencyDate": "2022-01-17T14:00:00+02:00",
+    "price": 151.50,
+    "filterType": "MAX"
+  },
+  {
+    "currencyCode": "LTC",
+    "currencyDate": "2022-01-24T12:00:00+02:00",
+    "price": 103.40,
+    "filterType": "MIN"
+  }
+]

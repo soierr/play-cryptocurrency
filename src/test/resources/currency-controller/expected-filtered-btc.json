@@ -1,0 +1,26 @@
+[
+  {
+    "currencyCode": "BTC",
+    "currencyDate": "2022-01-31T22:00:00+02:00",
+    "price": 38415.79,
+    "filterType": "NEWEST"
+  },
+  {
+    "currencyCode": "BTC",
+    "currencyDate": "2022-01-01T06:00:00+02:00",
+    "price": 46813.21,
+    "filterType": "OLDEST"
+  },
+  {
+    "currencyCode": "BTC",
+    "currencyDate": "2022-01-02T02:00:00+02:00",
+    "price": 47722.66,
+    "filterType": "MAX"
+  },
+  {
+    "currencyCode": "BTC",
+    "currencyDate": "2022-01-24T13:00:00+02:00",
+    "price": 33276.59,
+    "filterType": "MIN"
+  }
+]

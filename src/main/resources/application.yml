@@ -11,9 +11,13 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+
 springdoc:
   swagger-ui:
     enabled: false
+# to generate
+# http://localhost:8080/v3/api-docs
+
 xm:
   file-loader:
     price-folder-path: ${PRICE_FOLDER_PATH}

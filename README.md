@@ -21,8 +21,23 @@ Provided as local `swagger-ui.html`
 
 ### Building
 
+Create executable
+
 ```shell
 gradlew clean bootJar
+```
+
+Run tests
+
+```shell
+gradlew clean test
+```
+
+Run test with docker based tests, checks sql on real MySQL
+See `src/test/resources/.testcontainer.properties` for configuration details
+
+```shell
+gradlew clean test -PincludeIt
 ```
 
 Jar location: `${PROJECT_HOME}\build\libs\play-cryptocurrency-1.0-SNAPSHOT.jar`
@@ -47,12 +62,12 @@ Once container is created & started MySQL user `crypto` will be created automati
 
 Possible start options
 
+Change `${PROJECT_HOME}` in scripts below, accordingly to your local path
+
 1. Start app in Intellij Idea
 
 - Create configuration with main `RecommendationService` class
-- Create env variables for this configuration:
-
- Change `${PROJECT_HOME}` in script below, accordingly to your local path
+- Create env variables for this configuration, copy block below:
 
 ```shell
 DB_JDBC_URL=jdbc:mysql://localhost:3306/cryptodb;  
@@ -61,13 +76,35 @@ DB_PASSWORD=0!*XMP0)*-_Enough;
 PRICE_FOLDER_PATH=${PROJECT_HOME}\prices
 ```
 
-2. Start standalone jar
+2. Start all via docker compose
 
-First, make sure you have application jar, see Building section for details
+Make sure you have application jar, see Building section for details
+
+Create docker image:
+
+```shell
+cd ${PROJECT_HOME}
+
+docker build . -t play-cryptocurrency:1.0-SNAPSHOT
+```
+
+Start via `docker-compose-all.yml`
+
+```shell
+export DB_NAME='cryptodb' \
+DB_USERNAME='crypto' \
+DB_PASSWORD='0!*XMP0)*-_Enough' \
+DB_ROOT_PASSWORD='test' \
+DB_JDBC_URL=jdbc:mysql://mysql-8.0.28:3306/cryptodb \
+PRICE_FOLDER_PATH=/opt/prices &&\
+docker-compose -f ${PROJECT_HOME}/docker/docker-compose-all.yml up
+```
+
+3. Start standalone jar with only MySQL in Docker
+
+Make sure you have application jar, see Building section for details
 
 `cd ${PROJECT_HOME}/build/libs`
-
-Change `${PROJECT_HOME}` in scripts below, accordingly to your local path
 
 Windows terminal example: 
 ```shell
@@ -89,6 +126,12 @@ java -jar play-cryptocurrency-1.0-SNAPSHOT.jar \
 <br>
 
 > P.S. All creds are committed for simplicity not for production usage
+
+### Logging
+
+Kibana ready json log configured, can be activated with proper spring profile
+
+Details in `src/main/resources/logback-spring.xml`
 
 ### API Examples
 

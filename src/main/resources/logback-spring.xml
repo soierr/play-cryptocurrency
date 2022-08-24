@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <variable resource="logback.properties"/>
+
+    <!--<logger name="org.springframework.web.client.RestTemplate" level="DEBUG"/>-->
+
+    <property name="jsonFormat"
+              value="{&quot;timestamp &quot;: &quot;%date{yyyy-MM-dd'T'HH:mm:ss.SSSZZ}&quot;,
+          &quot;app_name&quot;: &quot;${APP_NAME:-}&quot;,
+          &quot;app_version&quot;: &quot;${APP_VERSION}&quot;,
+          &quot;level&quot;: &quot;%level&quot;,
+          &quot;class&quot;: &quot;%logger&quot;,
+          &quot;message&quot;: &quot;%.-100000message&quot;}"/>
+
+    <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc/>
+                <pattern>
+                    <pattern>
+                        ${jsonFormat}
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!--Kibana ready appender-->
+    <appender name="jsonFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>app.log</file>
+        <append>false</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc/>
+                <pattern>
+                    <pattern>
+                        ${jsonFormat}
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender name="simpleConsole" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="default">
+        <root level="INFO">
+            <appender-ref ref="simpleConsole"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="!default">
+        <root level="INFO">
+            <appender-ref ref="jsonFileAppender"/>
+        </root>
+    </springProfile>
+
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+</configuration>

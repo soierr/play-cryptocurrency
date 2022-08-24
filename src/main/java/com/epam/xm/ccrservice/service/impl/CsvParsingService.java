@@ -36,7 +36,13 @@ public class CsvParsingService implements ParsingService {
 
     private List<Currency> parse(PriceFile file) {
 
-        BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(file.getData()));
+        byte[] data = file.getData();
+
+        if (data == null) {
+            return List.of();
+        }
+
+        BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(data)); //could throw null pointer if data would be null
 
         List<Currency> currencies = new ArrayList<>();
 
@@ -62,7 +68,7 @@ public class CsvParsingService implements ParsingService {
 
         } catch (IOException e) {
 
-            log.error("Failed to process file", e);
+            log.error(String.format("Failed to process file, %s", file.getFilename()), e);
         }
 
         return currencies;

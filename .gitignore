@@ -3,6 +3,7 @@
 *.class
 
 # Package Files
+*.jar
 *.war
 
 #Eclipse
@@ -18,8 +19,11 @@ target/*
 #Gradle
 .gradle
 build/*
-!build/libs/
 
 #Docker
-docker/
-!docker/docker-compose.yml
+/docker/*
+!/docker/docker-compose.yml
+!/docker/docker-compose-all.yml
+
+#log
+*.log

@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-
 @Data
 @Entity
 public class Currency {
