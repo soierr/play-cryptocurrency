@@ -63,10 +63,15 @@ test {
     useJUnitPlatform()
     /* needed to override testcontainers config
     * in case we use -PincludeIt */
+    def prop = systemProperties.get('user.home')
     systemProperties.put('user.home', (projectDir.toString() + '/src/test/resources') as String)
 
     if (!project.hasProperty("includeIt")) {
         exclude 'com/epam/xm/ccrservice/docker/**'
+    }
+
+    doLast {
+        systemProperties.put('user.home', prop)
     }
 
 }
