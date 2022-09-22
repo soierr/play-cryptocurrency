@@ -3,8 +3,8 @@
 FROM azul/zulu-openjdk:11.0.16-11.58.15
 RUN cd / && mkdir -p "/opt"
 
-# dynamic versioning needed
-COPY ./build/libs/play-cryptocurrency-1.0-SNAPSHOT.jar /opt
+ARG APP_VERSION
+COPY ./build/libs/play-cryptocurrency-$APP_VERSION.jar /opt
 
 RUN mkdir /opt/prices
 COPY ./prices /opt/prices
@@ -16,4 +16,8 @@ COPY ./prices /opt/prices
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && apt-get -y install apt-utils procps
 # -------------
 
-CMD ["java", "-jar", "/opt/play-cryptocurrency-1.0-SNAPSHOT.jar"]
+RUN /bin/bash -c  "echo \#\!/bin/bash > /opt/start.sh"
+RUN /bin/bash -c "echo -e \"\njava -jar /opt/play-cryptocurrency-\"$APP_VERSION\".jar\" >> /opt/start.sh" # concatenation used inside so extra "" needed
+RUN /bin/bash -c "echo -e \"\" >> /opt/start.sh" # empty line
+RUN chmod u+x /opt/start.sh
+CMD ["/opt/start.sh"]
